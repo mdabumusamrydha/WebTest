@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+body{
+	background-color:blue;
+}
+
+button{
+    padding:10px;
+    color:black;
+}
+
+button:hover{
+	background-color:orange;
+}
+
+button:active{
+	background-color:red;
+}
+
+</style>
+</head>
+<body id="BG">
+
+<img id="myImg" src="https://static.giantbomb.com/uploads/original/0/4527/1051897-pacman.png">
+
+<h2 id="message">The Button Element</h2>
+<button type="button" onclick="changeBGGold()">Change BG to Gold.</button>
+<button type="button" onclick="changeBGPurple()">Change BG to Purple.</button>
+<button type="button" onclick="changeImage1()">Space Ship.</button>
+<button type="button" onclick="changeImage2()">OK.</button>
+
+<script>
+
+var numberOfClicks=0;
+var Image1="https://im.indiatimes.in/content/2014/Jan/lynx-mark-1-spaceship-by-space-expedition-corporation_1390290288_540x540.jpg";
+var Image2="http://firsthour.net/screenshots/dk-jungle-climber/dk-jungle-climber-thumbs-up.jpg";
+
+
+function changeImage1(){
+
+var imageElement=document.getElementById("myImg");
+imageElement.src=Image1;
+
+}
+
+function changeImage2(){
+
+var imageElement=document.getElementById("myImg");
+imageElement.src=Image2;
+
+}
+
+
+function changeBGGold()
+{
+
+ var bodyElement= document.getElementById("BG");
+ bodyElement.style.backgroundColor="gold";
+ 
+clickedButton();
+}
+
+function changeBGPurple()
+{
+
+ var bodyElement= document.getElementById("BG");
+ bodyElement.style.backgroundColor="purple";
+
+clickedButton();
+
+}
+
+function clickedButton()
+{
+  //1.Updating number of Clicks.
+  numberOfClicks = numberOfClicks +1;
+  //2.Getting message element.
+  var messageElement= document.getElementById("message"); 
+   //3.Changing message text.
+   messageElement.innerHTML="YOU HAVE CLICKED "+numberOfClicks+" times.";
+}
+
+
+</script>
+
+
+ 
+ 
+</body>
+</html>
+
