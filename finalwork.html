@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>360&deg; Week 11 Image Gallery Example_With_Text</title>
+    <meta name="description" content="360&deg; Image Gallery - A-Frame">
+    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+   
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>
+        <img id="city" crossorigin="anonymous" src="http://media1.s-nbcnews.com/i/streams/2014/March/140306/2D274905279691-today-wtc-360-140306-tease.jpg">
+        <img id="city-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-city.jpg">
+        <img id="cubes-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg">
+        <img id="sechelt-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-sechelt.jpg">
+        <audio id="click-sound" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
+        <img id="cubes" crossorigin="anonymous" src="http://pixexid.com/wp-content/uploads/2017/03/pier_39_carroussel_correct_position.jpg">
+        <img id="sechelt" crossorigin="anonymous" src="http://l3apq3bncl82o596k2d1ydn1-wpengine.netdna-ssl.com/wp-content/uploads/2016/09/360-redull-storytelling-vr.png">
+      </a-assets>
+ 
+      <!-- Camera + cursor. -->
+        <a-entity camera look-controls>
+            <a-cursor id="cursor" color="yellow"></a-cursor>
+        </a-entity>
+ 
+      
+       
+      <!-- 360-degree image. -->
+      <a-sky id="image-360" radius="10" src="#city">
+       <a-animation attribute="material.color" from="black" to="white" dur="1000" begin="fade"></a-animation>
+      </a-sky>
+      
+      
+      <!--  Image Links. -->
+          <a-text onclick="changeImage('#city'); showText(daejeonText);" align="center" value="New York" position="-2 -1 -4" geometry="primitive:plane"></a-text>
+          <a-text onclick="changeImage('#cubes'); showText(geumRiverText);" align="center" value="Ontario" position="0 -1 -4" geometry="primitive:plane"></a-text>      
+          <a-text onclick="changeImage('#sechelt'); showText(kaeryeonMountainText);" align="center" value="Kualalumpur" position="2 -1 -4" geometry="primitive:plane"></a-text>
+    
+      <!--  Text Object for fading.-->
+          <a-text id="showText" align="center" color="white" value="Testing 1, 2, 3" position="0 2.5 -4" opacity="0">
+              <a-animation attribute="position"
+                           dur="2000"
+                           from="0 2.5 -4" 
+                           to="0 1.75 -4"
+                           begin="move">
+              </a-animation>
+              <a-animation attribute="opacity" dur="1500" begin="fade" to="1">
+              </a-animation>
+          </a-text>
+
+      
+      
+    </a-scene>
+  
+    <script>
+    
+    var daejeonText= `New York is a state in the Northeastern United States.
+                      New York was one of the original Thirteen Colonies that formed the United States. 
+                      With an estimated 19.85 million residents in 2017,[4] it is the fourth most populous state.
+                      To distinguish the state from the city in the state with the same name, 
+                      it is sometimes called New York State.`;  
+      
+    var geumRiverText= `Ontario is one of the 13 provinces and territories of Canada and is located in east-central Canada.
+                        It is Canada's most populous province accounting for 38.3 percent of the country's population,
+                        and is the second-largest province in total area. 
+                        Ontario is fourth-largest in total area 
+                        when the territories of the Northwest Territories and Nunavut are included.
+                        It is home to the nation's capital city, Ottawa, and the nation's most populous city, Toronto,
+                        which is also Ontario's provincial capital.`;
+     
+    var kaeryeonMountainText= `Kuala Lumpur, officially the Federal Territory of Kuala Lumpur is the national capital of Malaysia as well as its largest city. 
+                               The only global city in Malaysia, it covers an area of 243 km2 (94 sq mi) and has an estimated population of 1.73 million as of 2016. 
+                               Greater Kuala Lumpur, also known as the Klang Valley, is an urban agglomeration of 7.25 million people as of 2017.
+                               It is among the fastest growing metropolitan regions in South-East Asia, in both population and economic development.`;
+
+
+      
+    function changeImage(imageName)
+      {
+        
+        //1. Find the sky image element (HTML).
+        var myImg= document.getElementById("image-360");
+        
+        //2.Change the image src attribute.
+        myImg.setAttribute( 'src', imageName);
+        
+        //3.Call the animation for fade in.
+        myImg.emit('fade');
+        
+      }
+      
+    function showText(textContent)
+      {
+        //0.Find the textElement
+        var textElement= document.getElementById("showText");
+        
+        //1.Hide the text.
+        textElement.setAttribute("opacity", "0");
+        
+        //2.Update the text value.
+        textElement.setAttribute("value", textContent);
+        
+        //3.Call the fade-in and lowering text animation.
+        textElement.emit('move');
+        textElement.emit('fade');
+        
+      }
+    
+    
+    </script>
+
+  
+  </body>
+</html>
